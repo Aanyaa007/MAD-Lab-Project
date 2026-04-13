@@ -1,0 +1,82 @@
+<!--
+    activity_profile.xml
+    Shared by both MODE_PERSON and MODE_CAREGIVER.
+    ProfileActivity hides ll_sensitivity_section and adjusts copy when
+    the logged-in user is a caregiver.
+ -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="?attr/android:colorBackground" android:fillViewport="true" android:scrollbars="none" android:overScrollMode="never">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="20dp" android:paddingEnd="20dp" android:paddingTop="48dp" android:paddingBottom="40dp">
+        <!--  ── HEADER ────────────────────────────────────────────────────  -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="28dp">
+            <TextView android:id="@+id/btn_back" android:layout_width="40dp" android:layout_height="40dp" android:gravity="center" android:text="←" android:textSize="20sp" android:textColor="?attr/colorPrimary" android:background="@drawable/bg_avatar_circle" android:backgroundTint="#10000000" android:contentDescription="Go back" android:clickable="true" android:focusable="true"/>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
+                <!--  ProfileActivity sets "My Profile" or "Caregiver Profile"  -->
+                <TextView android:id="@+id/tv_profile_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="My Profile" android:textSize="24sp" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                <!--  Shown only for caregivers; ProfileActivity sets text + VISIBLE  -->
+                <TextView android:id="@+id/tv_profile_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="" android:textSize="13sp" android:textColor="?android:attr/textColorSecondary" android:layout_marginTop="2dp" android:visibility="gone"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--  ── AVATAR + NAME ────────────────────────────────────────────  -->
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="24dp" app:cardCornerRadius="16dp" app:cardElevation="1dp" app:cardBackgroundColor="?android:attr/colorBackground" app:strokeWidth="1dp" app:strokeColor="#12000000">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="16dp">
+                <TextView android:id="@+id/tv_avatar_large" android:layout_width="72dp" android:layout_height="72dp" android:gravity="center" android:text="?" android:textSize="24sp" android:textColor="#FFFFFF" android:textStyle="bold" android:background="@drawable/bg_avatar_circle" android:layout_marginEnd="16dp" android:contentDescription="Your avatar"/>
+                <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="Your name">
+                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="15sp" android:inputType="textPersonName|textCapWords" android:contentDescription="Edit your name"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <!--  ── AVATAR COLOR ────────────────────────────────────────────  -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AVATAR COLOR" android:textSize="12sp" android:textStyle="bold" android:textColor="?android:attr/textColorSecondary" android:letterSpacing="0.08" android:layout_marginBottom="10dp" android:layout_marginStart="4dp"/>
+        <LinearLayout android:id="@+id/ll_color_picker" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="start" android:layout_marginBottom="28dp"/>
+        <!--  ── APP THEME ───────────────────────────────────────────────  -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="APP THEME" android:textSize="12sp" android:textStyle="bold" android:textColor="?android:attr/textColorSecondary" android:letterSpacing="0.08" android:layout_marginBottom="10dp" android:layout_marginStart="4dp"/>
+        <com.google.android.material.chip.ChipGroup android:id="@+id/cg_themes" android:layout_width="match_parent" android:layout_height="wrap_content" app:singleSelection="true" app:selectionRequired="true" android:layout_marginBottom="28dp">
+            <com.google.android.material.chip.Chip android:id="@+id/chip_theme_warm" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="48dp" android:text="🌅 Warm" android:textSize="@dimen/text_caption" android:contentDescription="Warm and dim theme"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chip_theme_cool" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="48dp" android:text="🌊 Cool" android:textSize="@dimen/text_caption" android:contentDescription="Cool and muted theme"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chip_theme_dark" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="48dp" android:text="🌙 Dark" android:textSize="@dimen/text_caption" android:contentDescription="High contrast dark theme"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chip_theme_standard" style="@style/Widget.MaterialComponents.Chip.Choice" android:layout_width="wrap_content" android:layout_height="48dp" android:text="☀️ Standard" android:textSize="@dimen/text_caption" android:contentDescription="Standard light theme"/>
+        </com.google.android.material.chip.ChipGroup>
+        <!--
+                    ── SENSITIVITIES ─────────────────────────────────────────────
+                    Entire block wrapped in ll_sensitivity_section so ProfileActivity
+                    can call setVisibility(GONE) for caregivers with a single line.
+                    Caregivers manage their patients' sensitivities inside
+                    PatientDetailActivity instead.
+                 -->
+        <LinearLayout android:id="@+id/ll_sensitivity_section" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MY SENSITIVITIES" android:textSize="12sp" android:textStyle="bold" android:textColor="?android:attr/textColorSecondary" android:letterSpacing="0.08" android:layout_marginBottom="4dp" android:layout_marginStart="4dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Slide to show how much each one affects you" android:textSize="13sp" android:textColor="?android:attr/textColorSecondary" android:layout_marginBottom="16dp" android:layout_marginStart="4dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_noise"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_light"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_crowd"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_texture"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_smell"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_change"/>
+            <View android:layout_width="match_parent" android:layout_height="24dp"/>
+        </LinearLayout>
+        <!--  ── PROACTIVE ALERTS TOGGLE ─────────────────────────────────  -->
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="32dp" app:cardCornerRadius="@dimen/card_corner_radius" app:cardElevation="0dp" app:strokeWidth="1dp" app:strokeColor="?attr/colorPrimary">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Proactive alerts" android:textSize="15sp" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                    <!--
+                                            tv_alert_description: ProfileActivity overwrites this for
+                                            caregivers: "Get notified before your patient's predicted
+                                            difficult times"
+                                         -->
+                    <TextView android:id="@+id/tv_alert_description" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gentle heads-up before difficult time slots" android:textSize="13sp" android:textColor="?android:attr/textColorSecondary" android:layout_marginTop="2dp"/>
+                </LinearLayout>
+                <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/switch_alerts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:contentDescription="Toggle proactive alerts on or off"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <!--  ── SAVE BUTTON ─────────────────────────────────────────────  -->
+        <com.google.android.material.button.MaterialButton android:id="@+id/btn_save_profile" android:layout_width="match_parent" android:layout_height="@dimen/btn_height_standard" android:text="Save changes" android:textSize="16sp" app:cornerRadius="@dimen/btn_corner_radius" android:contentDescription="Save profile changes"/>
+        <!--  ── LOGOUT ───────────────────────────────────────────────────  -->
+        <com.google.android.material.button.MaterialButton android:id="@+id/btn_reset" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="52dp" android:layout_marginTop="16dp" android:text="Logout" android:textSize="15sp" android:textColor="#D85A30" app:strokeColor="#D85A30" app:cornerRadius="@dimen/btn_corner_radius" android:contentDescription="Logout and go back to welcome screen"/>
+    </LinearLayout>
+</ScrollView>

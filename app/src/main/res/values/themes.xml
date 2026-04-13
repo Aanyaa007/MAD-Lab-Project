@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        Theme.SenseShield (Standard — default, clean Material light)
+        THEME_STANDARD = 3
+    -->
+    <style name="Theme.SenseShield" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/standard_primary</item>
+        <item name="colorPrimaryVariant">@color/standard_primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/standard_secondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/standard_background</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/standard_text</item>
+        <item name="android:textColorPrimary">@color/standard_text</item>
+        <item name="android:textColorSecondary">@color/standard_text_secondary</item>
+        <item name="android:windowBackground">@color/standard_background</item>
+        <item name="materialAlertDialogTheme">@style/SenseShield.Dialog.Standard</item>
+    </style>
+
+    <!--
+        Theme.SenseShield.Warm — warm oranges, low contrast, dim
+        THEME_WARM_DIM = 0
+        FIX: explicit textColorPrimary/Secondary so all ?android:attr/textColorPrimary
+        references resolve to the warm dark-brown instead of the system default black.
+    -->
+    <style name="Theme.SenseShield.Warm" parent="Theme.SenseShield">
+        <item name="colorPrimary">@color/warm_primary</item>
+        <item name="colorPrimaryVariant">@color/warm_primary_dark</item>
+        <item name="colorSecondary">@color/warm_secondary</item>
+        <item name="android:colorBackground">@color/warm_background</item>
+        <item name="colorSurface">@color/warm_surface</item>
+        <item name="colorOnSurface">@color/warm_text</item>
+        <item name="android:textColorPrimary">@color/warm_text</item>
+        <item name="android:textColorSecondary">@color/warm_text_secondary</item>
+        <item name="android:windowBackground">@color/warm_background</item>
+        <!-- Ensures EditText, TextInputLayout hints, and card text inherit warm colors -->
+        <item name="android:editTextColor">@color/warm_text</item>
+        <item name="android:textColorHint">@color/warm_text_secondary</item>
+        <item name="materialAlertDialogTheme">@style/SenseShield.Dialog.Warm</item>
+    </style>
+
+    <!--
+        Theme.SenseShield.Cool — cool blues, desaturated, calm
+        THEME_COOL_MUTED = 1
+        FIX: same as warm — explicit text colors so nothing inherits grey-on-blue.
+    -->
+    <style name="Theme.SenseShield.Cool" parent="Theme.SenseShield">
+        <item name="colorPrimary">@color/cool_primary</item>
+        <item name="colorPrimaryVariant">@color/cool_primary_dark</item>
+        <item name="colorSecondary">@color/cool_secondary</item>
+        <item name="android:colorBackground">@color/cool_background</item>
+        <item name="colorSurface">@color/cool_surface</item>
+        <item name="colorOnSurface">@color/cool_text</item>
+        <item name="android:textColorPrimary">@color/cool_text</item>
+        <item name="android:textColorSecondary">@color/cool_text_secondary</item>
+        <item name="android:windowBackground">@color/cool_background</item>
+        <item name="android:editTextColor">@color/cool_text</item>
+        <item name="android:textColorHint">@color/cool_text_secondary</item>
+        <item name="materialAlertDialogTheme">@style/SenseShield.Dialog.Cool</item>
+    </style>
+
+    <!--
+        Theme.SenseShield.HighContrast — very dark bg, strong contrast
+        THEME_HIGH_CONTRAST = 2
+        FIX: explicit off-white text so it always shows on dark background.
+        Also forces card / surface text to use hc_text not inherit dark-mode black.
+    -->
+    <style name="Theme.SenseShield.HighContrast" parent="Theme.SenseShield">
+        <item name="colorPrimary">@color/hc_primary</item>
+        <item name="colorPrimaryVariant">@color/hc_primary_dark</item>
+        <item name="colorSecondary">@color/hc_secondary</item>
+        <item name="android:colorBackground">@color/hc_background</item>
+        <item name="colorSurface">@color/hc_surface</item>
+        <item name="colorOnSurface">@color/hc_text</item>
+        <item name="android:textColorPrimary">@color/hc_text</item>
+        <item name="android:textColorSecondary">@color/hc_text_secondary</item>
+        <item name="android:windowBackground">@color/hc_background</item>
+        <item name="android:editTextColor">@color/hc_text</item>
+        <item name="android:textColorHint">@color/hc_text_secondary</item>
+        <item name="materialAlertDialogTheme">@style/SenseShield.Dialog.Dark</item>
+    </style>
+
+    <!-- Splash screen — no action bar, full screen -->
+    <style name="Theme.SenseShield.Splash" parent="Theme.SenseShield">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- Emergency Calm — always uses a very dark, non-stimulating bg -->
+    <style name="Theme.SenseShield.Calm" parent="Theme.SenseShield.HighContrast">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowShowWallpaper">false</item>
+    </style>
+
+    <!-- ── Widget styles ──────────────────────────────────────────────────── -->
+
+    <style name="Widget.SenseShield.SensitivityLabel" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <style name="Widget.SenseShield.CalmButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">72dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="Widget.SenseShield.OnboardingButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">28dp</item>
+    </style>
+
+    <style name="Widget.SenseShield.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+
+    <style name="SenseShield.Dialog.Standard" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:background">@color/standard_background</item>
+        <item name="android:textColorPrimary">@color/standard_text</item>
+        <item name="android:textColorSecondary">@color/standard_text_secondary</item>
+    </style>
+
+    <style name="SenseShield.Dialog.Warm" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:background">@color/warm_surface</item>
+        <item name="android:textColorPrimary">@color/warm_text</item>
+        <item name="android:textColorSecondary">@color/warm_text_secondary</item>
+    </style>
+
+    <style name="SenseShield.Dialog.Cool" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:background">@color/cool_surface</item>
+        <item name="android:textColorPrimary">@color/cool_text</item>
+        <item name="android:textColorSecondary">@color/cool_text_secondary</item>
+    </style>
+
+    <style name="SenseShield.Dialog.Dark" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">@color/hc_surface</item>
+        <item name="android:background">@color/hc_surface</item>
+        <item name="android:textColorPrimary">@color/hc_text</item>
+        <item name="android:textColorSecondary">@color/hc_text_secondary</item>
+    </style>
+
+</resources>

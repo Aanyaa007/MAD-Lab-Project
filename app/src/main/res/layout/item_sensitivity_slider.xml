@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_sensitivity_slider.xml
+    Reusable row: large icon | label + level text | slider
+    Touch target for the entire row is >= 48dp (minHeight enforced).
+    The icon is a Unicode emoji rendered as text — no image assets needed.
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="?attr/colorSurface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top row: icon + label + current level text -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/touch_target_min">
+
+            <!-- Emoji icon — large, distinct, no image asset needed -->
+            <TextView
+                android:id="@+id/tv_sensitivity_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:text="🔊"
+                android:importantForAccessibility="no" />
+                <!-- importantForAccessibility=no — the slider's contentDescription
+                     describes the whole row, so the icon is decorative only -->
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tv_sensitivity_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:textSize="@dimen/text_body"
+                android:textColor="?attr/android:textColorPrimary"
+                android:fontFamily="sans-serif-medium"
+                android:text="Loud sounds" />
+
+            <!-- Current level label: "Moderate" -->
+            <TextView
+                android:id="@+id/tv_sensitivity_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_caption"
+                android:textColor="?attr/colorPrimary"
+                android:fontFamily="sans-serif-medium"
+                android:text="Moderate" />
+
+        </LinearLayout>
+
+        <!--
+            Material Slider — value range 1.0 to 5.0, step 1.0
+            contentDescription is set programmatically from strings.xml
+            so screen readers say e.g. "Loud sounds sensitivity slider, 3 out of 5"
+        -->
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider_sensitivity_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:valueFrom="1.0"
+            android:valueTo="5.0"
+            android:stepSize="1.0"
+            android:value="3.0"
+            app:thumbRadius="@dimen/slider_thumb_size"
+            app:trackHeight="@dimen/slider_track_height"
+            app:haloRadius="24dp" />
+            <!-- haloRadius=24dp ensures touch area is comfortably >= 48dp -->
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

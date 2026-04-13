@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SenseShield</string>
+    <string name="tile_label">Safe Space</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Hi there 👋</string>
+    <string name="onboarding_welcome_subtitle">SenseShield is here to help you feel safe and calm.</string>
+    <string name="onboarding_name_title">What\'s your name?</string>
+    <string name="onboarding_name_hint">Type your name here</string>
+    <string name="onboarding_avatar_title">Pick your color</string>
+    <string name="onboarding_sensitivity_title">How do these feel?</string>
+    <string name="onboarding_sensitivity_subtitle">Slide to show how much each one bothers you</string>
+    <string name="onboarding_tools_title">What helps you calm down?</string>
+    <string name="onboarding_tools_subtitle">Pick as many as you like</string>
+    <string name="onboarding_theme_title">Choose how the app looks</string>
+    <string name="onboarding_done_title">You\'re all set! 🎉</string>
+    <string name="onboarding_done_subtitle">SenseShield will help you stay calm and in control.</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_done">Let\'s go</string>
+    <string name="btn_skip">Skip</string>
+
+    <!-- Sensitivity labels -->
+    <string name="sensitivity_noise">Loud sounds</string>
+    <string name="sensitivity_light">Bright lights</string>
+    <string name="sensitivity_crowd">Crowded places</string>
+    <string name="sensitivity_texture">Touch / textures</string>
+    <string name="sensitivity_smell">Strong smells</string>
+    <string name="sensitivity_change">Sudden changes</string>
+
+    <!-- Calm tools -->
+    <string name="tool_breathing">Breathing</string>
+    <string name="tool_sound">Sound therapy</string>
+    <string name="tool_visual">Visual grounding</string>
+    <string name="tool_countdown">Countdown</string>
+
+    <!-- Themes -->
+    <string name="theme_warm">Warm &amp; dim</string>
+    <string name="theme_cool">Cool &amp; muted</string>
+    <string name="theme_dark">High contrast</string>
+    <string name="theme_standard">Standard</string>
+
+    <!-- Home -->
+    <string name="home_greeting_morning">Good morning</string>
+    <string name="home_greeting_afternoon">Good afternoon</string>
+    <string name="home_greeting_evening">Good evening</string>
+    <string name="home_calm_button">I need calm NOW</string>
+    <string name="home_log_event">Log a moment</string>
+    <string name="home_history">My history</string>
+    <string name="home_caregiver">Caregiver view</string>
+    <string name="home_alert_title">Heads up</string>
+    <string name="home_alert_message">This time of day has felt hard before. Want to try something calming?</string>
+
+    <!-- Emergency calm -->
+    <string name="calm_you_are_safe">You are safe.</string>
+    <string name="calm_breathe_in">Breathe in…</string>
+    <string name="calm_breathe_out">Breathe out…</string>
+    <string name="calm_hold">Hold…</string>
+    <string name="calm_did_it_help">Did that help?</string>
+    <string name="calm_yes">👍 Yes</string>
+    <string name="calm_no">👎 Not really</string>
+
+    <!-- Caregiver dashboard -->
+    <string name="caregiver_title">Caregiver View</string>
+    <string name="caregiver_pin_setup_title">Create a PIN</string>
+    <string name="caregiver_pin_setup_message">Set a 4-digit PIN to protect the caregiver view.</string>
+    <string name="caregiver_pin_enter_title">Caregiver View</string>
+    <string name="caregiver_pin_enter_message">Enter the caregiver PIN to continue.</string>
+    <string name="caregiver_pin_confirm_title">Confirm PIN</string>
+    <string name="caregiver_pin_confirm_message">Enter the same 4 digits again to confirm.</string>
+    <string name="caregiver_pin_error">Incorrect PIN. Please try again.</string>
+    <string name="caregiver_pin_mismatch">PINs don\'t match. Please try again.</string>
+    <string name="caregiver_lock">🔒 Lock</string>
+    <string name="caregiver_this_week">THIS WEEK</string>
+    <string name="caregiver_moments_label">moments</string>
+    <string name="caregiver_intensity_label">avg intensity</string>
+    <string name="caregiver_last_7_days">Last 7 days</string>
+    <string name="caregiver_recent_moments">Recent moments</string>
+    <string name="caregiver_notes_title">📝 Notes for carers</string>
+    <string name="caregiver_no_events">No moments logged yet.</string>
+    <string name="caregiver_no_notes">No notes added yet. You can add notes in the profile settings.</string>
+
+    <!-- Proactive alert notification -->
+    <string name="notif_alert_title">Heads up 🔔</string>
+    <string name="notif_channel_proactive_name">Proactive Alerts</string>
+    <string name="notif_channel_proactive_desc">Gentle reminders before predicted difficult times</string>
+
+    <!-- Accessibility content descriptions -->
+    <string name="cd_noise_slider">Loud sounds sensitivity slider</string>
+    <string name="cd_light_slider">Bright lights sensitivity slider</string>
+    <string name="cd_crowd_slider">Crowded places sensitivity slider</string>
+    <string name="cd_texture_slider">Touch and textures sensitivity slider</string>
+    <string name="cd_smell_slider">Strong smells sensitivity slider</string>
+    <string name="cd_change_slider">Sudden changes sensitivity slider</string>
+    <string name="cd_emergency_calm">Emergency calm button. Tap to start calming session.</string>
+    <string name="cd_caregiver_entry">Open caregiver dashboard</string>
+</resources>

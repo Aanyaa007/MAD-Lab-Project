@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ic_check_circle.xml
+    A simple filled circle with a checkmark inside.
+    Used on the theme selection cards to indicate the selected theme.
+    Tinted at runtime with ?attr/colorPrimary to match the active theme.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Filled circle background -->
+    <path
+        android:fillColor="#FF534AB7"
+        android:pathData="M12,2C6.477,2 2,6.477 2,12s4.477,10 10,10 10,-4.477 10,-10S17.523,2 12,2z"/>
+
+    <!-- Checkmark -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M9,11.5L11,13.5L15,9.5"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+
+</vector>

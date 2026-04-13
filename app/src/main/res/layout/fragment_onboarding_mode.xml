@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_onboarding_mode.xml
+    FIX: Card heights changed from fixed 160dp to wrap_content so the
+    "I'm a caregiver or teacher" title never clips on small/medium phones.
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:background="?attr/android:colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Header emoji -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👋"
+            android:textSize="52sp"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"
+            android:importantForAccessibility="no"/>
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to SenseShield"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center"
+            android:layout_marginBottom="6dp"/>
+
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Who are you setting this up for?"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.3"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- ── CARD 1: Person with autism ──────────────────────────── -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_mode_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:minHeight="120dp"
+            android:contentDescription="I have sensory sensitivities — set up for myself"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/avatar_purple"
+            app:cardBackgroundColor="?attr/colorSurface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:text="🧩"
+                    android:textSize="40sp"
+                    android:gravity="center"
+                    android:importantForAccessibility="no"
+                    android:layout_marginEnd="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="This is for me"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="I have sensory sensitivities and want help staying calm"
+                        android:textSize="13sp"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:lineSpacingMultiplier="1.4"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/check_mode_person"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:text="✓"
+                    android:textSize="18sp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:visibility="invisible"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── CARD 2: Caregiver / Teacher ─────────────────────────── -->
+        <!-- FIX: height="wrap_content" so title wraps instead of being clipped -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_mode_caregiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:minHeight="120dp"
+            android:contentDescription="I am a caregiver or teacher — set up for someone else"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/cool_primary"
+            app:cardBackgroundColor="?attr/colorSurface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:text="🤝"
+                    android:textSize="40sp"
+                    android:gravity="center"
+                    android:importantForAccessibility="no"
+                    android:layout_marginEnd="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- FIX: was wrap_content width → text got squeezed by checkmark -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="I'm a caregiver or teacher"
+                        android:textSize="19sp"
+                        android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="I support someone with sensory sensitivities"
+                        android:textSize="13sp"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:lineSpacingMultiplier="1.4"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/check_mode_caregiver"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:text="✓"
+                    android:textSize="18sp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:visibility="invisible"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Privacy note -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="12dp"
+            android:background="@drawable/bg_soft_card">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔒"
+                android:textSize="14sp"
+                android:importantForAccessibility="no"
+                android:layout_marginEnd="6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All data stays private on this device"
+                android:textSize="12sp"
+                android:textColor="?android:attr/textColorSecondary"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

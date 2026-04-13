@@ -1,0 +1,85 @@
+<!--
+    activity_patient_detail.xml
+    Caregiver's view of a single patient.
+
+    Sections:
+      1. Header — patient avatar, name, subtitle, Log + Report buttons
+      2. Stats row — events this week, avg severity
+      3. 7-day heatmap
+      4. Recent events (built programmatically)
+      5. SENSITIVITIES — sliders for all 6 dimensions; caregiver sets these
+         on behalf of the patient (replaces what was previously on the
+         shared profile screen)
+      6. Notes — free-text area for caregiver observations
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="?android:attr/colorBackground">
+    <!--  ── HEADER ───────────────────────────────────────────────────────  -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="16dp" android:paddingEnd="20dp" android:paddingTop="48dp" android:paddingBottom="16dp">
+        <TextView android:id="@+id/btn_back" android:layout_width="40dp" android:layout_height="40dp" android:gravity="center" android:text="←" android:textSize="20sp" android:textColor="?attr/colorPrimary" android:background="@drawable/bg_avatar_circle" android:backgroundTint="#10000000" android:clickable="true" android:focusable="true" android:contentDescription="Go back"/>
+        <!--  Patient avatar  -->
+        <TextView android:id="@+id/tv_detail_avatar" android:layout_width="48dp" android:layout_height="48dp" android:gravity="center" android:text="?" android:textSize="17sp" android:textColor="#FFFFFF" android:textStyle="bold" android:background="@drawable/bg_avatar_circle" android:layout_marginStart="4dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="12dp">
+            <TextView android:id="@+id/tv_detail_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Patient" android:textSize="20sp" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+            <TextView android:id="@+id/tv_detail_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensory profile" android:textSize="12sp" android:textColor="?android:attr/textColorSecondary"/>
+        </LinearLayout>
+        <!--  Action buttons  -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="end">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn_log_for_patient" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="+ Log" android:textSize="12sp" app:cornerRadius="16dp"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn_weekly_report" style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="📋 Report" android:textSize="11sp" android:textAllCaps="false" app:cornerRadius="16dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!--  ── SCROLLABLE CONTENT ────────────────────────────────────────────  -->
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:scrollbars="none" android:overScrollMode="never">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="20dp" android:paddingEnd="20dp" android:paddingBottom="40dp">
+            <!--  ── STATS ROW ───────────────────────────────────────────  -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="20dp">
+                <!--  Events this week  -->
+                <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="8dp" app:cardCornerRadius="16dp" app:cardBackgroundColor="#EDE9FF" app:cardElevation="0dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:padding="16dp">
+                        <TextView android:id="@+id/tv_stat_week" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textSize="28sp" android:textStyle="bold" android:textColor="#534AB7"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="this week" android:textSize="11sp" android:textColor="#6A6299" android:gravity="center"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <!--  Average severity  -->
+                <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="8dp" app:cardCornerRadius="16dp" app:cardBackgroundColor="#E1F5EE" app:cardElevation="0dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:padding="16dp">
+                        <TextView android:id="@+id/tv_stat_severity" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="—" android:textSize="28sp" android:textStyle="bold" android:textColor="#0F6E56"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="avg severity" android:textSize="11sp" android:textColor="#2A7D5E" android:gravity="center"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+            <!--  ── 7-DAY HEATMAP ───────────────────────────────────────  -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Last 7 days" android:textSize="14sp" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary" android:layout_marginBottom="10dp"/>
+            <LinearLayout android:id="@+id/ll_heatmap" android:layout_width="match_parent" android:layout_height="100dp" android:orientation="horizontal" android:layout_marginBottom="24dp"/>
+            <!--  ── RECENT EVENTS ───────────────────────────────────────  -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Recent events" android:textSize="14sp" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary" android:layout_marginBottom="10dp"/>
+            <LinearLayout android:id="@+id/ll_recent_events" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginBottom="28dp"/>
+            <!--
+                            ── PATIENT SENSITIVITIES ──────────────────────────────────
+                            Caregivers record how strongly each trigger affects THIS patient.
+                            PatientDetailActivity loads existing values from the patient's
+                            SensoryProfile and saves them back on "Save sensitivities".
+                         -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PATIENT SENSITIVITIES" android:textSize="12sp" android:textStyle="bold" android:textColor="?android:attr/textColorSecondary" android:letterSpacing="0.08" android:layout_marginBottom="4dp" android:layout_marginStart="4dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Slide to record how strongly each trigger affects this patient" android:textSize="13sp" android:textColor="?android:attr/textColorSecondary" android:layout_marginBottom="16dp" android:layout_marginStart="4dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_noise"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_light"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_crowd"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_texture"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_smell"/>
+            <View android:layout_width="match_parent" android:layout_height="8dp"/>
+            <include layout="@layout/item_sensitivity_slider" android:id="@+id/slider_change"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn_save_sensitivities" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:layout_marginBottom="28dp" android:layout_marginStart="4dp" android:text="Save sensitivities" app:cornerRadius="20dp"/>
+            <!--  ── CAREGIVER NOTES ────────────────────────────────────  -->
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NOTES" android:textSize="12sp" android:textStyle="bold" android:textColor="?android:attr/textColorSecondary" android:letterSpacing="0.08" android:layout_marginBottom="8dp" android:layout_marginStart="4dp"/>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText android:id="@+id/et_notes" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Add notes about this patient’s patterns…" android:inputType="textMultiLine" android:minLines="3" android:gravity="top|start"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn_save_notes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Save notes" app:cornerRadius="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

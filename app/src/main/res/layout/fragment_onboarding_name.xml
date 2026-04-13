@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?attr/android:colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Let's personalise"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="6dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What should we call you?"
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- Avatar preview — large, centred -->
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp">
+
+            <!-- Soft background circle -->
+            <View
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_soft_circle_purple"/>
+
+            <!-- Initials -->
+            <TextView
+                android:id="@+id/tv_avatar_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="?"
+                android:textSize="36sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:contentDescription="Avatar preview"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap a color below to change it"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Name input — big, friendly -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:hint="Your name"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="18sp"
+                android:imeOptions="actionNext"
+                android:contentDescription="Enter your name"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Color picker label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose your colour"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="14dp"/>
+
+        <!-- Row 1 of colors -->
+        <LinearLayout
+            android:id="@+id/ll_avatar_colors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Row 2 of colors -->
+        <LinearLayout
+            android:id="@+id/ll_avatar_colors_row2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</ScrollView>

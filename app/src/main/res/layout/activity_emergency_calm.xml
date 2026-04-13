@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_emergency_calm.xml
+    The full-screen calm session.
+
+    Phases (managed by EmergencyCalmActivity):
+      PHASE 1 — "You are safe." landing (2 seconds, then auto-advances)
+      PHASE 2 — Breathing exercise (animated circle, inhale/hold/exhale text)
+      PHASE 3 — Sound therapy (sound name + stop button)
+      PHASE 4 — Post-calm reflection (emoji thumbs up / down)
+
+    All phases live in this one layout. Visibility toggled in Java.
+    Dark, non-stimulating background always — enforced by Theme.SenseShield.Calm.
+    All text sp. All interactive elements >= 48dp touch target.
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hc_background"
+    android:keepScreenOn="true">
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         PHASE 1 — LANDING: "You are safe."
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/phase_landing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="48dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🛡️"
+            android:textSize="72sp"
+            android:gravity="center"
+            android:layout_marginBottom="32dp"
+            android:contentDescription="SenseShield shield" />
+
+
+
+        <TextView
+            android:id="@+id/tv_you_are_safe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calm_you_are_safe"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/hc_text"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.4"
+            android:layout_marginBottom="16dp" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take a moment. Everything is okay."
+            android:textSize="16sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You're in calm mode"
+            android:textSize="14sp"
+            android:textColor="@color/hc_text_secondary"
+            android:padding="12dp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         PHASE 2 — BREATHING EXERCISE
+         Animated circle that expands (inhale) and contracts (exhale).
+         Text below tells user what to do.
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/phase_breathing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <!-- Stop / exit button top-right -->
+        <TextView
+            android:id="@+id/btn_stop_breathing"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="✕"
+            android:textSize="20sp"
+            android:textColor="@color/hc_text_secondary"
+            android:contentDescription="Stop breathing exercise"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- The breathing circle — animated via ObjectAnimator in Java -->
+        <View
+            android:id="@+id/breathing_circle"
+            android:layout_width="@dimen/breathe_circle_min"
+            android:layout_height="@dimen/breathe_circle_min"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_breathing_circle"
+            android:contentDescription="Breathing circle, expanding and contracting"
+            android:layout_marginBottom="48dp" />
+
+        <!-- Breathing instruction: "Breathe in…" / "Hold…" / "Breathe out…" -->
+        <TextView
+            android:id="@+id/tv_breathing_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calm_breathe_in"
+            android:textSize="28sp"
+            android:textColor="@color/hc_text"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Countdown timer for current phase (4 / 4 / 6 seconds) -->
+        <TextView
+            android:id="@+id/tv_breathing_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Cycle counter: "Cycle 1 of 3" -->
+        <TextView
+            android:id="@+id/tv_cycle_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cycle 1 of 3"
+            android:textSize="14sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         PHASE 3 — VISUAL GROUNDING  (5-4-3-2-1 technique)
+         User steps through 5 senses, naming things around them.
+         Each step advances on button tap — user goes at their own pace.
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/phase_visual"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="40dp"
+        android:visibility="gone">
+
+        <!-- Skip top-right -->
+        <TextView
+            android:id="@+id/btn_skip_grounding"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:text="Skip"
+            android:textSize="14sp"
+            android:textColor="@color/hc_text_secondary"
+            android:contentDescription="Skip visual grounding exercise"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grounding Exercise"
+            android:textSize="16sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="6dp" />
+
+        <!-- "Step 1 of 5" -->
+        <TextView
+            android:id="@+id/tv_grounding_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step 1 of 5"
+            android:textSize="13sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Big number -->
+        <TextView
+            android:id="@+id/tv_grounding_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textSize="96sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:gravity="center"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Sense emoji -->
+        <TextView
+            android:id="@+id/tv_grounding_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👀"
+            android:textSize="52sp"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:layout_marginBottom="12dp" />
+
+        <!-- e.g. "things you can SEE" -->
+        <TextView
+            android:id="@+id/tv_grounding_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="things you can SEE"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/hc_text"
+            android:gravity="center"
+            android:layout_marginBottom="10dp" />
+
+        <!-- Hint -->
+        <TextView
+            android:id="@+id/tv_grounding_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Look around slowly and name each one"
+            android:textSize="15sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="40dp" />
+
+        <!-- Done with this step -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_grounding_next"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="Done ✓"
+            android:textSize="16sp"
+            app:cornerRadius="28dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:contentDescription="Done with this step, go to next" />
+
+    </LinearLayout>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         PHASE 4 — SOUND THERAPY
+         Playing the user's preferred sound.
+         Simple, distraction-free: just a sound name + stop button.
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/phase_sound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="48dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎵"
+            android:textSize="72sp"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Playing for you"
+            android:textSize="16sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Name of the track currently playing -->
+        <TextView
+            android:id="@+id/tv_sound_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rain"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/hc_text"
+            android:gravity="center"
+            android:layout_marginBottom="48dp" />
+
+        <!-- Sound selector chips — lets user switch track mid-session -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_sound_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            android:layout_marginBottom="40dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sound_rain"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="🌧 Rain"
+                android:checked="true"
+                android:textColor="@color/hc_text"
+                android:contentDescription="Rain sounds" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sound_ocean"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="🌊 Ocean"
+                android:textColor="@color/hc_text"
+                android:contentDescription="Ocean waves" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sound_forest"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="🌲 Forest"
+                android:textColor="@color/hc_text"
+                android:contentDescription="Forest sounds" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sound_white"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="〰 White noise"
+                android:textColor="@color/hc_text"
+                android:contentDescription="White noise" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Stop sound and move to reflection -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_stop_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="I feel better"
+            android:textSize="16sp"
+            app:cornerRadius="28dp"
+            android:contentDescription="Stop sound and finish calm session"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp" />
+
+    </LinearLayout>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         PHASE 5 — COUNTDOWN TIMER
+         Simple countdown. Helps ground the user in the present moment.
+         Duration: 30 / 60 / 90 seconds — user selectable.
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/phase_countdown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="48dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take your time"
+            android:textSize="20sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Big countdown number -->
+        <TextView
+            android:id="@+id/tv_countdown_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60"
+            android:textSize="108sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:gravity="center"
+            android:contentDescription="Countdown timer" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="seconds"
+            android:textSize="16sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Duration chip picker -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_countdown_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            android:layout_marginBottom="40dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_30s"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="30s"
+                android:textColor="@color/hc_text"
+                android:contentDescription="30 seconds" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_60s"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="60s"
+                android:checked="true"
+                android:textColor="@color/hc_text"
+                android:contentDescription="60 seconds" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_90s"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="90s"
+                android:textColor="@color/hc_text"
+                android:contentDescription="90 seconds" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Skip -->
+        <TextView
+            android:id="@+id/btn_skip_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="Skip"
+            android:textSize="14sp"
+            android:textColor="@color/hc_text_secondary"
+            android:contentDescription="Skip countdown timer"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         PHASE 6 — PROGRESSIVE MUSCLE RELAXATION
+         5 muscle groups. Each: tense 5s → release 10s → next group.
+         Helps release physical tension from sensory overload.
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/phase_pmr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="40dp"
+        android:visibility="gone">
+
+        <!-- Skip top-right -->
+        <TextView
+            android:id="@+id/btn_skip_pmr"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:text="Skip"
+            android:textSize="14sp"
+            android:textColor="@color/hc_text_secondary"
+            android:contentDescription="Skip muscle relaxation"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Muscle Relaxation"
+            android:textSize="16sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="4dp" />
+
+        <!-- "Group 1 of 5" -->
+        <TextView
+            android:id="@+id/tv_pmr_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Group 1 of 5"
+            android:textSize="13sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Muscle group emoji -->
+        <TextView
+            android:id="@+id/tv_pmr_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✊"
+            android:textSize="64sp"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Muscle group name -->
+        <TextView
+            android:id="@+id/tv_pmr_muscle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hands"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/hc_text"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Tense / Release instruction -->
+        <TextView
+            android:id="@+id/tv_pmr_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Squeeze your fists tight"
+            android:textSize="18sp"
+            android:textColor="?attr/colorPrimary"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Countdown for current action -->
+        <TextView
+            android:id="@+id/tv_pmr_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textSize="80sp"
+            android:textStyle="bold"
+            android:textColor="@color/hc_text"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Tense vs Release label -->
+        <TextView
+            android:id="@+id/tv_pmr_phase_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TENSE"
+            android:textSize="14sp"
+            android:textColor="@color/hc_text_secondary"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="0dp" />
+
+    </LinearLayout>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         PHASE 7 — POST-CALM REFLECTION
+         Single emoji question. 3 seconds max cognitive load.
+         Result stored in SensoryEvent.effectiveness for AI learning.
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/phase_reflection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="48dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calm_did_it_help"
+            android:textSize="24sp"
+            android:textColor="@color/hc_text"
+            android:gravity="center"
+            android:layout_marginBottom="40dp" />
+
+        <!-- Two big emoji buttons — minimum 80dp touch target each -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_yes_helped"
+                android:layout_width="120dp"
+                android:layout_height="80dp"
+                android:text="@string/calm_yes"
+                android:textSize="22sp"
+                android:layout_marginEnd="16dp"
+                app:cornerRadius="16dp"
+                android:contentDescription="Yes, that helped" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_no_helped"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="120dp"
+                android:layout_height="80dp"
+                android:text="@string/calm_no"
+                android:textSize="22sp"
+                app:cornerRadius="16dp"
+                android:contentDescription="Not really, didn't help much" />
+
+        </LinearLayout>
+
+        <!-- Skip reflection -->
+        <TextView
+            android:id="@+id/btn_skip_reflection"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Skip"
+            android:textSize="14sp"
+            android:textColor="@color/hc_text_secondary"
+            android:contentDescription="Skip feedback"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</FrameLayout>

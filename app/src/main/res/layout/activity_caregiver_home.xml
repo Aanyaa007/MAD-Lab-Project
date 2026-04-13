@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
+
+    <!-- ── HEADER ─────────────────────────────────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_cg_greeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good morning"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:letterSpacing="0.02"/>
+
+            <TextView
+                android:id="@+id/tv_cg_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caregiver"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+        <!-- Avatar / Profile -->
+        <TextView
+            android:id="@+id/tv_cg_avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="?"
+            android:textSize="17sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="@drawable/bg_avatar_circle"
+            android:contentDescription="Open profile settings"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </LinearLayout>
+
+    <!-- ── SECTION HEADER ─────────────────────────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="YOUR PATIENTS"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorSecondary"
+            android:letterSpacing="0.08"/>
+
+        <!-- Add Patient button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="+ Add Patient"
+            android:textSize="13sp"
+            app:cornerRadius="20dp"/>
+
+    </LinearLayout>
+
+    <!-- ── EMPTY STATE ─────────────────────────────────────────────────── -->
+    <LinearLayout
+        android:id="@+id/ll_empty_patients"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧑‍🤝‍🧑"
+            android:textSize="56sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:importantForAccessibility="no"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No patients yet"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap + Add to create a profile for someone you support."
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:lineSpacingMultiplier="1.4"/>
+
+    </LinearLayout>
+
+    <!-- ── PATIENT LIST ────────────────────────────────────────────────── -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_patients"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="24dp"
+        android:clipToPadding="false"
+        android:animateLayoutChanges="false"
+        android:visibility="gone"/>
+
+    <!-- ── BOTTOM: Logout ─────────────────────────────────────────────── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="28dp"
+        android:paddingTop="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cg_logout"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="13sp"
+            app:cornerRadius="20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

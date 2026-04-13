@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_history.xml
+    Scrollable list of past sensory events.
+    Each row shows: severity color dot | trigger icon | time | location | calm tool used
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/android:colorBackground">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="←"
+                android:textSize="20sp"
+                android:textColor="?attr/colorPrimary"
+                android:background="@drawable/bg_avatar_circle"
+                android:backgroundTint="#10000000"
+                android:contentDescription="Go back"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="My History"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginStart="12dp" />
+
+            <!-- Event count badge -->
+            <TextView
+                android:id="@+id/tv_event_count"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:background="@drawable/bg_avatar_circle"
+                android:backgroundTint="#10000000"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Export CSV button -->
+            <TextView
+                android:id="@+id/btn_export"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:gravity="center"
+                android:text="⬆ Export"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:background="@drawable/bg_avatar_circle"
+                android:backgroundTint="#10000000"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Export history as CSV" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Empty state — shown when no events logged yet -->
+    <LinearLayout
+        android:id="@+id/ll_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="48dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📋"
+            android:textSize="56sp"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No moments logged yet"
+            android:textSize="@dimen/text_title"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use the Emergency Calm button or\nLog a Moment to start tracking."
+            android:textSize="@dimen/text_body"
+            android:textColor="?android:attr/textColorSecondary"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.4" />
+
+    </LinearLayout>
+
+    <!-- Events list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="@dimen/screen_padding_horizontal"
+        android:paddingEnd="@dimen/screen_padding_horizontal"
+        android:paddingBottom="24dp"
+        android:clipToPadding="false"
+        android:animateLayoutChanges="false"
+        android:contentDescription="List of sensory events" />
+
+</LinearLayout>

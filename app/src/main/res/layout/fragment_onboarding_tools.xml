@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_onboarding_tools.xml — FIXED
+    Removed colorTertiaryContainer reference which doesn't exist in our themes.
+    Tool cards are built programmatically in OnboardingToolsFragment.java.
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?attr/android:colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What helps you calm down?"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="6dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick as many as you like"
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Tool cards built programmatically here -->
+        <GridLayout
+            android:id="@+id/gl_tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- Sound section -->
+        <LinearLayout
+            android:id="@+id/ll_sound_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎵  Which sound helps most?"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginBottom="12dp"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_sounds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                android:layout_marginBottom="24dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_rain"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="🌧  Rain"
+                    android:checked="true"
+                    android:contentDescription="Rain sounds"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_ocean"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="🌊  Ocean"
+                    android:contentDescription="Ocean waves"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_forest"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="🌲  Forest"
+                    android:contentDescription="Forest sounds"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_white_noise"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="〰  White noise"
+                    android:contentDescription="White noise"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_music"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="🎵  Gentle music"
+                    android:contentDescription="Gentle music"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+        <!-- Privacy note — simple LinearLayout, no MaterialCardView -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_soft_card"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔒  Your profile stays on this device only."
+                android:textSize="13sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:lineSpacingMultiplier="1.5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A caregiver view can be added later from settings."
+                android:textSize="13sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:lineSpacingMultiplier="1.5"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

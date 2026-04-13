@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- bg_severity_dot.xml
+     Small circle used as the severity color indicator in history rows.
+     Color is set programmatically in the adapter via setBackgroundTintList(). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/severity_3" />
+</shape>

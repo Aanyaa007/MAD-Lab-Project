@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    layout_llm_insight.xml
+    Custom view inflated inside a MaterialAlertDialog.
+    Shows either a loading spinner or the LLM response text.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="16dp">
+
+    <!-- Loading state -->
+    <LinearLayout
+        android:id="@+id/ll_llm_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:indeterminate="true"
+            style="?android:attr/progressBarStyle"/>
+
+        <TextView
+            android:id="@+id/tv_llm_loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Analysing your patterns…"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginTop="14dp"/>
+
+    </LinearLayout>
+
+    <!-- Result state (hidden until response arrives) -->
+    <LinearLayout
+        android:id="@+id/ll_llm_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:fadeScrollbars="false"
+            android:scrollbarStyle="outsideInset">
+
+            <TextView
+                android:id="@+id/tv_llm_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:lineSpacingMultiplier="1.6"
+                android:textColor="?android:attr/textColorPrimary"
+                android:paddingBottom="8dp"
+                android:selectable="true"/>
+
+        </ScrollView>
+
+        <!-- Attribution -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#1A000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Groq · Llama 3.3 70B · on-device privacy  "
+                android:textSize="10sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:alpha="0.55"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#1A000000"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

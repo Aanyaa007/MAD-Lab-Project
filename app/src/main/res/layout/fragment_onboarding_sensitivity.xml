@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_onboarding_sensitivity.xml
+    The key accessibility-first UI screen:
+    Each sensitivity type is shown with a large icon (not text dropdown),
+    a label, and a Material Slider. All touch targets >= 48dp.
+    All text in sp for system font scaling support.
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/screen_padding_horizontal"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:id="@+id/tv_sensitivity_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_sensitivity_title"
+            android:textSize="@dimen/text_headline"
+            android:textColor="?attr/android:textColorPrimary"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_sensitivity_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboarding_sensitivity_subtitle"
+            android:textSize="@dimen/text_body"
+            android:textColor="?attr/android:textColorSecondary"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- ── NOISE ───────────────────────────────────────────────────────── -->
+        <include layout="@layout/item_sensitivity_slider"
+            android:id="@+id/slider_noise" />
+
+        <View android:layout_width="match_parent" android:layout_height="8dp"/>
+
+        <!-- ── LIGHT ───────────────────────────────────────────────────────── -->
+        <include layout="@layout/item_sensitivity_slider"
+            android:id="@+id/slider_light" />
+
+        <View android:layout_width="match_parent" android:layout_height="8dp"/>
+
+        <!-- ── CROWD ───────────────────────────────────────────────────────── -->
+        <include layout="@layout/item_sensitivity_slider"
+            android:id="@+id/slider_crowd" />
+
+        <View android:layout_width="match_parent" android:layout_height="8dp"/>
+
+        <!-- ── TEXTURE ─────────────────────────────────────────────────────── -->
+        <include layout="@layout/item_sensitivity_slider"
+            android:id="@+id/slider_texture" />
+
+        <View android:layout_width="match_parent" android:layout_height="8dp"/>
+
+        <!-- ── SMELL ───────────────────────────────────────────────────────── -->
+        <include layout="@layout/item_sensitivity_slider"
+            android:id="@+id/slider_smell" />
+
+        <View android:layout_width="match_parent" android:layout_height="8dp"/>
+
+        <!-- ── CHANGE ──────────────────────────────────────────────────────── -->
+        <include layout="@layout/item_sensitivity_slider"
+            android:id="@+id/slider_change" />
+
+    </LinearLayout>
+</ScrollView>

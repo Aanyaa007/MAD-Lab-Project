@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- bg_breathing_circle.xml
+     The animated breathing circle on the calm screen.
+     Soft purple by default — color animates between breathe_inhale,
+     breathe_hold, and breathe_exhale in EmergencyCalmActivity via
+     ObjectAnimator on the background tint. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/breathe_inhale" />
+</shape>

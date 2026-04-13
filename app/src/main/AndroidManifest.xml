@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ── Permissions ──────────────────────────────────────────────────────── -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Removed SCHEDULE_EXACT_ALARM — using setInexactRepeating instead (no permission required) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <application
+        android:name=".SenseShieldApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.SenseShield"
+        android:supportsRtl="true"
+        tools:targetApi="31">
+
+        <!-- ── SPLASH (launcher entry point) ──────────────────────────────── -->
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/Theme.SenseShield.Splash"
+            android:exported="true"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- ── ONBOARDING ────────────────────────────────────────────────── -->
+        <activity
+            android:name=".ui.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- ── HOME ──────────────────────────────────────────────────────── -->
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
+
+        <!-- ── EMERGENCY CALM ─────────────────────────────────────────────
+             turnScreenOn + showWhenLocked = accessible from lock screen   -->
+        <activity
+            android:name=".ui.calm.EmergencyCalmActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SenseShield.Calm"
+            android:launchMode="singleTask"
+            android:turnScreenOn="true"
+            android:showWhenLocked="true"
+            android:windowSoftInputMode="stateHidden" />
+
+        <!-- ── CAREGIVER DASHBOARD (PIN-protected, sub-view for patient's app) ── -->
+        <activity
+            android:name=".ui.caregiver.CaregiverActivity"
+            android:exported="false" />
+
+        <!-- ── CAREGIVER HOME (main screen when logged in as caregiver) ──── -->
+        <activity
+            android:name=".ui.caregiver.CaregiverHomeActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
+
+        <!-- ── PATIENT DETAIL (caregiver views a patient's history) ─────── -->
+        <activity
+            android:name=".ui.caregiver.PatientDetailActivity"
+            android:exported="false" />
+
+        <!-- ── HISTORY ───────────────────────────────────────────────────── -->
+        <activity
+            android:name=".ui.history.HistoryActivity"
+            android:exported="false" />
+
+        <!-- ── LOG EVENT ─────────────────────────────────────────────────── -->
+        <activity
+            android:name=".ui.home.LogEventActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- ── PROFILE / SETTINGS ────────────────────────────────────────── -->
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+
+        <!-- ── HELP / ABOUT ───────────────────────────────────────────────── -->
+        <activity
+            android:name=".ui.help.HelpActivity"
+            android:exported="false" />
+
+        <!-- ── QUICK SETTINGS TILE (Safe Space shortcut) ─────────────────── -->
+        <service
+            android:name=".services.CalmTileService"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- ── PROACTIVE ALERT RECEIVER ──────────────────────────────────── -->
+        <receiver
+            android:name=".services.AlertReceiver"
+            android:exported="false" />
+
+        <!-- ── FILE PROVIDER (for CSV export share) ───────────────────────── -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

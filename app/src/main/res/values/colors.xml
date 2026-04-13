@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ── Common ──────────────────────────────────────────────────────────── -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Avatar picker colors (shown as circles on onboarding) -->
+    <color name="avatar_purple">#7F77DD</color>
+    <color name="avatar_teal">#1D9E75</color>
+    <color name="avatar_coral">#D85A30</color>
+    <color name="avatar_blue">#378ADD</color>
+    <color name="avatar_amber">#BA7517</color>
+    <color name="avatar_pink">#D4537E</color>
+
+    <!-- ── STANDARD THEME (clean Material light) ───────────────────────────── -->
+    <color name="standard_primary">#534AB7</color>
+    <color name="standard_primary_dark">#3C3489</color>
+    <color name="standard_secondary">#1D9E75</color>
+    <color name="standard_background">#F8F7FF</color>
+    <color name="standard_text">#1A1A2E</color>
+    <color name="standard_text_secondary">#5A5A7A</color>
+
+    <!-- ── WARM / DIM THEME (amber tones, low stimulation) ─────────────────── -->
+    <!-- Principle: warm amber/ochre reduces visual stress for photosensitive users -->
+    <color name="warm_primary">#BA7517</color>
+    <color name="warm_primary_dark">#854F0B</color>
+    <color name="warm_secondary">#D85A30</color>
+    <color name="warm_background">#FDF3E3</color>   <!-- Very light amber -->
+    <color name="warm_surface">#FAE8C8</color>
+    <color name="warm_text">#3B2200</color>          <!-- Dark brown, not black -->
+    <color name="warm_text_secondary">#7A4F1A</color>
+
+    <!-- ── COOL / MUTED THEME (desaturated blues, calming) ─────────────────── -->
+    <color name="cool_primary">#185FA5</color>
+    <color name="cool_primary_dark">#0C447C</color>
+    <color name="cool_secondary">#0F6E56</color>
+    <color name="cool_background">#EEF4FB</color>   <!-- Very light blue -->
+    <color name="cool_surface">#D8E8F5</color>
+    <color name="cool_text">#042C53</color>
+    <color name="cool_text_secondary">#2A5A84</color>
+
+    <!-- ── HIGH CONTRAST THEME (dark bg, strong contrast) ──────────────────── -->
+    <!-- For users who need clear visual boundaries; works well in low-light -->
+    <color name="hc_primary">#A78BFA</color>        <!-- Soft purple on dark bg -->
+    <color name="hc_primary_dark">#7C3AED</color>
+    <color name="hc_secondary">#34D399</color>      <!-- Soft green accent -->
+    <color name="hc_background">#0F0F1A</color>     <!-- Very dark navy -->
+    <color name="hc_surface">#1E1E2E</color>
+    <color name="hc_text">#F0EEFF</color>           <!-- Off-white, not pure white -->
+    <color name="hc_text_secondary">#A89EC9</color>
+
+    <!-- ── Severity indicator colors (used in history list) ────────────────── -->
+    <color name="severity_1">#5DCAA5</color>  <!-- Green — minimal -->
+    <color name="severity_2">#97C459</color>  <!-- Light green — mild -->
+    <color name="severity_3">#EF9F27</color>  <!-- Amber — moderate -->
+    <color name="severity_4">#D85A30</color>  <!-- Coral — strong -->
+    <color name="severity_5">#E24B4A</color>  <!-- Red — extreme -->
+
+    <!-- ── Heatmap colors (caregiver dashboard) ────────────────────────────── -->
+    <color name="heatmap_0">#F1EFE8</color>   <!-- No events — light gray -->
+    <color name="heatmap_1">#FAC775</color>   <!-- 1 event — light amber -->
+    <color name="heatmap_2">#EF9F27</color>   <!-- 2 events — amber -->
+    <color name="heatmap_3">#D85A30</color>   <!-- 3 events — coral -->
+    <color name="heatmap_4">#E24B4A</color>   <!-- 4+ events — red -->
+
+    <!-- ── Breathing animation colors ──────────────────────────────────────── -->
+    <color name="breathe_inhale">#AFA9EC</color>   <!-- Soft purple — expand -->
+    <color name="breathe_exhale">#5DCAA5</color>   <!-- Soft teal — release -->
+    <color name="breathe_hold">#85B7EB</color>     <!-- Soft blue — hold -->
+
+</resources>

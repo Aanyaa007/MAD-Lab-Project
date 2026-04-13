@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/android:colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="40dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="48dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/btn_help_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="←"
+                android:textSize="20sp"
+                android:textColor="?attr/colorPrimary"
+                android:background="@drawable/bg_avatar_circle"
+                android:backgroundTint="#10000000"
+                android:contentDescription="Go back"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Help &amp; About"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginStart="12dp" />
+
+        </LinearLayout>
+
+        <!-- App logo + version -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛡️"
+                android:textSize="64sp"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SenseShield+"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorPrimary"
+                android:gravity="center"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Version 1.0  ·  AI-Assisted Sensory Support"
+                android:textSize="13sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Section: What is SenseShield? -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is SenseShield+?"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SenseShield+ is an AI-powered app that helps people with autism prevent and manage sensory overload. Rather than only reacting after overload happens, it predicts high-risk time slots based on your personal patterns and gently warns you beforehand."
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Section: How to use it -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How to use it"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1️⃣  Complete onboarding — set your name, sensitivity levels, and preferred calm tools.\n\n2️⃣  Log moments — whenever you feel sensory stress, tap Log a Moment. The more you log, the smarter the AI gets.\n\n3️⃣  Watch for the yellow banner — when the AI predicts a difficult time slot, a gentle alert appears on your home screen.\n\n4️⃣  Use Emergency Calm — tap the purple button any time for a guided calm session: breathing → grounding → sound → muscle relaxation.\n\n5️⃣  Check your history — tap History to see your logged events and export them as a CSV file.\n\n6️⃣  Caregiver view — caregivers can create patient profiles and track their sensory patterns from the caregiver dashboard."
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Section: Calm Session Phases -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency Calm phases"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🛡️  You are safe  —  2-second grounding message\n\n🌬️  Breathing  —  4-4-6 box breathing (3 cycles)\n\n👀  Visual Grounding  —  5-4-3-2-1 senses exercise\n\n🎵  Sound Therapy  —  calming soundscape of your choice\n\n⏱️  Countdown Timer  —  30, 60, or 90 seconds\n\n💪  Muscle Relaxation  —  tense &amp; release 5 muscle groups\n\n✅  Reflection  —  rate how much it helped (feeds the AI)"
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lineSpacingMultiplier="1.6"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Section: AI Predictions -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How the AI predictions work"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The AI is rule-based and runs entirely on your device — no data is ever sent to the internet.\n\nIt builds a 24×7 frequency grid of your events (hour × day-of-week) over the past 30 days. If the current time slot has historically been difficult (score ≥ 3 events), it shows the yellow alert banner.\n\nYou need at least 5 logged events before predictions begin. Alerts can be turned off in Profile Settings."
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Section: Privacy -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All your data is stored locally on your device in a SQLite database. SenseShield+ does not require an internet connection and never transmits personal information anywhere."
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Credits -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Developed as a MAD Lab project\nBy Aanyaa Agarwwal, Bhavya &amp; Mayurika Sathish\nVI Semester CCE — Section A"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.5" />
+
+    </LinearLayout>
+
+</ScrollView>

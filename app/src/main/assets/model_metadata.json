@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "description": "Sensory overload risk prediction for SenseShield+",
+  "feature_names": [
+    "time_of_day_norm",
+    "is_weekend",
+    "noise_exposure",
+    "light_exposure",
+    "crowd_exposure",
+    "texture_exposure",
+    "smell_exposure",
+    "change_exposure",
+    "event_freq_1h",
+    "event_freq_3h",
+    "avg_intensity",
+    "overall_sensitivity"
+  ],
+  "input_size": 12,
+  "output": "overload_risk_0_to_1",
+  "risk_thresholds": {
+    "low": [
+      0.0,
+      0.35
+    ],
+    "moderate": [
+      0.35,
+      0.6
+    ],
+    "high": [
+      0.6,
+      0.8
+    ],
+    "critical": [
+      0.8,
+      1.0
+    ]
+  },
+  "risk_labels": [
+    "Low",
+    "Moderate",
+    "High",
+    "Critical"
+  ],
+  "risk_colors": [
+    "#4CAF50",
+    "#FF9800",
+    "#F44336",
+    "#9C27B0"
+  ],
+  "risk_advice": [
+    "You're doing well. Keep up your routine.",
+    "Things might feel a bit much soon. Consider a short break.",
+    "Your senses may be getting overloaded. Try a calming tool.",
+    "High overload risk. Tap Emergency Calm now."
+  ],
+  "research_sources": [
+    "Marco et al. (2011) \u2013 Sensory processing in autism",
+    "Baranek et al. (2006) \u2013 Sensory processing subtypes in ASD",
+    "Green et al. (2013) \u2013 Sensory over-responsivity in ASD",
+    "Schmidt et al. (2018) \u2013 WESAD stress & affect dataset",
+    "Kern et al. (2006) \u2013 Sensory processing in everyday life of children with ASD"
+  ]
+}
